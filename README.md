@@ -50,7 +50,7 @@ This project implements a real-time SMS notification system as a part of a Ruby 
    rails server
    ```
 4. **Credentials**:
-   Credentials are already presnet in App in encrypted form.
+   Credentials are already present in App in encrypted form.
 ## Run Tests
 
 ```bash
