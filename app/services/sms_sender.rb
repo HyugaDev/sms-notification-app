@@ -1,43 +1,20 @@
 # frozen_string_literal: true
 
-require 'httparty'
-
 # Service to send sms through clicksend
 class SmsSender
-  include HTTParty
-  base_uri 'https://rest.clicksend.com/v3'
-
-  def self.send_sms(to, body)
-    response = post_sms(to, body)
-    log_sms(to, body) if response.code == 200
-    log_response(response)
+  def self.send_sms(receiver, body)
+    sms_response = ClickSend.new(message: body, receiver:).send_sms
+    create_sms_log(receiver, body) if sms_response.code == 200
+    log_response(sms_response)
   end
 
-  def self.log_sms(to, body)
-    SmsLog.create(phone_number: to, message: body)
-  end
-
-  def self.post_sms(to, body)
-    post('/sms/send', basic_auth: auth, body: sms_body(to, body).to_json,
-                      headers: { 'Content-Type' => 'application/json' })
-  end
-
-  def self.auth
-    username = Rails.application.credentials.clicksend[:username]
-    api_key = Rails.application.credentials.clicksend[:api_key]
-    { username:, password: api_key }
-  end
-
-  def self.sms_body(to, body)
-    {
-      messages: [
-        {
-          source: 'ruby',
-          body:,
-          to:
-        }
-      ]
-    }
+  def self.create_sms_log(receiver, body)
+    sms_log = SmsLog.new(phone_number: receiver, message: body)
+    if sms_log.save
+      Rails.logger.info 'SmsLog created successfully.'
+    else
+      Rails.logger.error "Errors in saving SmsLog: #{sms_log.errors.full_messages}"
+    end
   end
 
   def self.log_response(response)

@@ -9,7 +9,7 @@ RSpec.describe SmsSender, type: :service do
 
     context 'when sending an SMS successfully', :vcr do
       it 'logs the SMS' do
-        expect(SmsSender).to receive(:log_sms).with(to, body)
+        expect(SmsSender).to receive(:create_sms_log).with(to, body)
         SmsSender.send_sms(to, body)
       end
 
@@ -22,11 +22,11 @@ RSpec.describe SmsSender, type: :service do
       let(:error_response) { instance_double(HTTParty::Response, code: 500, body: 'Error') }
 
       before do
-        allow(SmsSender).to receive(:post_sms).and_return(error_response)
+        allow_any_instance_of(ClickSend).to receive(:send_sms).and_return(error_response)
       end
 
       it 'does not log the SMS' do
-        expect(SmsSender).not_to receive(:log_sms)
+        expect(SmsSender).not_to receive(:create_sms_log)
         SmsSender.send_sms(to, body)
       end
 
