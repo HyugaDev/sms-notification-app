@@ -1,0 +1,23 @@
+<div class="container">
+  <h1>Logs</h1>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Phone Number</th>
+        <th>Message</th>
+        <th>Sent At</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @sms_logs.each do |log| %>
+        <tr>
+          <td><%= log.phone_number %></td>
+          <td><%= log.message %></td>
+          <td><%= log.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

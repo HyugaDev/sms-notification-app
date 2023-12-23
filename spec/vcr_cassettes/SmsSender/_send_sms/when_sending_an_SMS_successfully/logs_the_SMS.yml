@@ -1,0 +1,60 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://rest.clicksend.com/v3/sms/send
+    body:
+      encoding: UTF-8
+      string: '{"messages":[{"source":"ruby","body":"Test message","to":"+1234567890"}]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Authorization:
+      - Basic YW5uYV9tYWNrOjVCNjkyODI1LUFBNUItQjg5NS01RjY3LUExNDkwQzMyRDE0OQ==
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 22 Dec 2023 17:10:38 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - protected
+      Cache-Control:
+      - no-cache, private
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Ratelimit-Remaining:
+      - '2999'
+      X-Ratelimit-Limit:
+      - '3000'
+      X-Upstream-Latency:
+      - '181'
+      X-Proxy-Latency:
+      - '54'
+    body:
+      encoding: UTF-8
+      string: '{"http_code":200,"response_code":"SUCCESS","response_msg":"Messages
+        queued for delivery.","data":{"total_price":0,"total_count":1,"queued_count":0,"messages":[{"to":"+1234567890","body":"Test
+        message","from":"","schedule":"","message_id":"1EEA0ED0-776C-6480-9FA5-3F20E88A6987","custom_string":"","is_shared_system_number":true,"status":"INVALID_RECIPIENT"}],"_currency":{"currency_name_short":"USD","currency_prefix_d":"$","currency_prefix_c":"\u00a2","currency_name_long":"US
+        Dollars"},"blocked_count":0}}'
+  recorded_at: Fri, 22 Dec 2023 17:10:38 GMT
+recorded_with: VCR 6.2.0
