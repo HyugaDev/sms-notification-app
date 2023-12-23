@@ -25,7 +25,7 @@ This project implements a real-time SMS notification system as a part of a Ruby 
 
 ## Prerequisites
 
-- rvn
+- rvm
 - ruby
 
 ## Installation
