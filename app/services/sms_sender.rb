@@ -2,6 +2,7 @@
 
 require 'httparty'
 
+# Service to send sms through clicksend
 class SmsSender
   include HTTParty
   base_uri 'https://rest.clicksend.com/v3'

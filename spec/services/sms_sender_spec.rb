@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe SmsSender, type: :service do
   describe '.send_sms' do
     let(:to) { '+1234567890' }
     let(:body) { 'Test message' }
-    
+
     context 'when sending an SMS successfully', :vcr do
       it 'logs the SMS' do
         expect(SmsSender).to receive(:log_sms).with(to, body)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # spec/models/user_spec.rb
 
 require 'rails_helper'
@@ -16,9 +18,9 @@ RSpec.describe User, type: :model do
     end
 
     it 'enqueues a job to send welcome SMS' do
-      expect {
+      expect do
         user.save
-      }.to have_enqueued_job(SmsNotificationJob).with(user, "Welcome to our service, #{user.name}!")
+      end.to have_enqueued_job(SmsNotificationJob).with(user, "Welcome to our service, #{user.name}!")
     end
   end
 
@@ -31,9 +33,9 @@ RSpec.describe User, type: :model do
     end
 
     it 'enqueues a job to send password change SMS' do
-      expect {
+      expect do
         user.update(password: 'new_password', password_confirmation: 'new_password')
-      }.to have_enqueued_job(SmsNotificationJob).with(user, "#{user.name}, your password was changed successfully.")
+      end.to have_enqueued_job(SmsNotificationJob).with(user, "#{user.name}, your password was changed successfully.")
     end
   end
 end
